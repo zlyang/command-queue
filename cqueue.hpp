@@ -7,7 +7,7 @@
 
 template <typename T, int cap_>
 class CQueue {
- private:
+private:
   std::array<T, cap_>   queue_;
   std::mutex mutex_;
   std::condition_variable  condv_;
@@ -16,7 +16,7 @@ class CQueue {
   int tail_;
   volatile int size_;
 
- public:
+public:
   CQueue() : head_(0),tail_(0),size_(0) {}
   ~CQueue() {}
 
@@ -32,6 +32,7 @@ class CQueue {
     size_++;
 
     condv_.notify_one();
+    
     return 0;
   }
 
@@ -46,7 +47,7 @@ class CQueue {
     }
 
     item = queue_.at(tail_);
-    tail_ = (++tail_) % cap_;
+    tail_ = (tail_ + 1) % cap_;
     size_--;
 
     return 0;
@@ -60,7 +61,7 @@ class CQueue {
     }
 
     item = queue_.at(tail_);
-    tail_ = (++tail_) % cap_;
+    tail_ = (tail_ + 1) % cap_;
     size_--;
 
     return 0;
