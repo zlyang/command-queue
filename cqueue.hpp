@@ -18,7 +18,7 @@ private:
 
 public:
   CQueue() : head_(0),tail_(0),size_(0) {}
-  ~CQueue() {}
+  virtual ~CQueue() {}
 
   int push(T &item) {
     std::lock_guard<std::mutex> lk(mutex_);
@@ -32,7 +32,7 @@ public:
     size_++;
 
     condv_.notify_one();
-    
+
     return 0;
   }
 
