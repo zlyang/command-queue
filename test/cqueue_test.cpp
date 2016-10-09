@@ -13,7 +13,7 @@ void cosumer(int id) {
   int ret = 0;
 
   while (true) {
-    ret = cq.pop(rcv, 5);
+    ret = cq.dequeue(rcv, 5);
     if (ret < 0) {
       continue;
     }
@@ -29,7 +29,7 @@ void cosumer(int id) {
 
 int main(int argc, char const *argv[]) {
   for(int i=0; i<10; i++) {
-    cq.push(i);
+    cq.enqueue(i);
     // std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
 

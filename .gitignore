@@ -32,3 +32,4 @@
 *.d
 *.d.*
 cqueue_test
+.tags*

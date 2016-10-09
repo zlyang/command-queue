@@ -20,7 +20,7 @@ public:
   CQueue() : head_(0),tail_(0),size_(0) {}
   virtual ~CQueue() {}
 
-  int push(T &item) {
+  int enqueue(T &item) {
     std::lock_guard<std::mutex> lk(mutex_);
 
     if (size_ >= cap_) {
@@ -36,7 +36,7 @@ public:
     return 0;
   }
 
-  int pop(T &item, int timeout_ms) {
+  int dequeue(T &item, int timeout_ms) {
     std::unique_lock<std::mutex> lk(mutex_);
 
     if(size_ == 0) {
@@ -53,7 +53,7 @@ public:
     return 0;
   }
 
-  int pop(T &item) {
+  int dequeue(T &item) {
     std::unique_lock<std::mutex> lk(mutex_);
 
     if(size_ == 0) {
